@@ -309,7 +309,7 @@ export default function QuoteFormScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <BackButton />
+      <BackButton destination="/(tabs)/quotes" />
       <ThemedText type="title">{quoteId ? 'Edit Quote' : 'New Quote'}</ThemedText>
       <ScrollView
         style={styles.form}

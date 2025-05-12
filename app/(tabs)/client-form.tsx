@@ -106,7 +106,7 @@ export default function ClientFormScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <BackButton />
+      <BackButton destination="/(tabs)/clients" />
       <ThemedText type="title">{clientId ? 'Edit Client' : 'New Client'}</ThemedText>
       <ScrollView
         style={styles.form}

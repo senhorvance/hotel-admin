@@ -5,13 +5,17 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-export default function BackButton() {
+interface BackButtonProps {
+  destination: string; // Route to navigate to
+}
+
+export default function BackButton({ destination }: BackButtonProps) {
   const colorScheme = useColorScheme();
 
   return (
     <Pressable
       style={styles.container}
-      onPress={() => router.back()}
+      onPress={() => router.navigate(destination)}
     >
       <IconSymbol
         name="arrow.left"
