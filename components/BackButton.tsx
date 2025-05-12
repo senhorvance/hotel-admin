@@ -25,7 +25,7 @@ export default function BackButton() {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 40,
+    top: 60, // Adjusted to align with increased container paddingTop
     left: 16,
     zIndex: 10,
   },
