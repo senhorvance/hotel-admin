@@ -42,34 +42,34 @@ export default function HomeScreen() {
       const weekEnd = new Date(weekStart);
       weekEnd.setDate(weekStart.getDate() + 6);
 
-      // Week occupancy: Sum guests where stay overlaps with week
+      // Week occupancy: Sum beds where stay overlaps with week
       const weekResult = await db.getFirstAsync<{
-        total_guests: number;
+        total_beds: number;
       }>(
-        `SELECT COALESCE(SUM(number_of_guests), 0) AS total_guests
+        `SELECT COALESCE(SUM(number_of_beds), 0) AS total_beds
          FROM quotes
          WHERE invoice_status = 'invoiced'
          AND check_in_date <= ? AND check_out_date >= ?`,
         [formatDate(weekEnd), formatDate(weekStart)]
       );
-      setWeekOccupancy(weekResult?.total_guests || 0);
+      setWeekOccupancy(weekResult?.total_beds || 0);
 
-      // Today occupancy: Sum guests where stay includes today
+      // Today occupancy: Sum beds where stay includes today
       const today = formatDate(new Date());
       const todayResult = await db.getFirstAsync<{
-        total_guests: number;
+        total_beds: number;
       }>(
-        `SELECT COALESCE(SUM(number_of_guests), 0) AS total_guests
+        `SELECT COALESCE(SUM(number_of_beds), 0) AS total_beds
          FROM quotes
          WHERE invoice_status = 'invoiced'
          AND check_in_date <= ? AND check_out_date >= ?`,
         [today, today]
       );
-      setTodayOccupancy(todayResult?.total_guests || 0);
+      setTodayOccupancy(todayResult?.total_beds || 0);
 
       console.log('Occupancy loaded:', {
-        week: weekResult?.total_guests,
-        today: todayResult?.total_guests,
+        week: weekResult?.total_beds,
+        today: todayResult?.total_beds,
       });
     } catch (error) {
       console.error('Error loading occupancy:', error);
@@ -95,7 +95,6 @@ export default function HomeScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title">Home</ThemedText>
       <ThemedText style={styles.weekRange}>Week: {getWeekRange(weekStart)}</ThemedText>
       <ThemedView style={styles.navigation}>
         <Pressable

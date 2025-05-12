@@ -110,13 +110,6 @@ export default function QuotesScreen() {
                   />
                 </Pressable>
               )}
-              <Pressable onPress={() => handleDelete(item.quote_id)}>
-                <IconSymbol
-                  name="trash"
-                  size={24}
-                  color={Colors[colorScheme ?? 'light'].tint}
-                />
-              </Pressable>
             </View>
           </ThemedView>
         )}
